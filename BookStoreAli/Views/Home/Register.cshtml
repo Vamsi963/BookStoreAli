@@ -1,0 +1,47 @@
+﻿@model BookStoreAli.Models.RegisterUser
+
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div class="center-block">
+
+
+    <div class="div-center">
+
+        <div class="content">
+
+            <h3>Register</h3>
+            <hr />
+            <form id="registerForm" method="Post">
+                <div class="form-group">
+                    <span>@ViewBag.errormsg</span>
+                    <label>Name</label>
+                    <input type="text" name="@nameof(Model.Name)" class="form-control" placeholder="Name">
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group ">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" id="password" name="@nameof(Model.Password)" class="form-control" placeholder="Password">
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group ">
+                    <label for="exampleInputPassword1">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="@nameof(Model.ConfirmPassword)" class="form-control" placeholder="Password">
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="btn btn-primary registerBtn">Register</button>
+                <spam> &nbsp; Already Registered? @Html.ActionLink("Login", "Login")</spam>
+
+            </form>
+
+        </div>
+
+
+
+    </div>
+</div>
+
+
+

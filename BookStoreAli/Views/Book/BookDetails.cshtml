@@ -1,0 +1,111 @@
+﻿@model IEnumerable<BookStoreAli.Models.Book>
+
+@{
+    ViewData["Title"] = "BookDetails";
+}
+
+<h1>Book Store</h1>
+
+
+<p>
+    @Html.ActionLink(linkText: "Create", actionName: "Create", routeValues: "", htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Available)
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @if (item.Available == true)
+                    {
+                        <span>Yes</span>
+                    }
+                    else
+                    {
+                        <span>No</span>
+                    }
+
+                </td>
+
+                <td>
+                    @Html.ActionLink(linkText: "Edit", actionName: "Edit", routeValues: new { Id = item.Id }, htmlAttributes: new { @class = "btn btn-info btn-sm" })
+                    @*@Html.ActionLink(linkText: "Delete", actionName: "Delete", routeValues: new {Id =item.Id}, htmlAttributes: new { @class = "btn btn-danger btn-sm deleteBtn" })*@
+                    <button class="btn btn-danger btn-sm deleteBtn" value="@item.Id">Delete</button>
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<form id="deleteForm"  action="Delete" method="post">
+    <input type="hidden" id="bookId" name="Id" />
+</form>
+@section scripts{
+
+    <script>
+
+        $('.deleteBtn').click(function (e) {
+            var confirmation = confirm("are you sure you want to remove the item?");
+            if (confirmation) {
+                $.ajax({
+                    type: "POST",
+                   url: '@Url.Action("Delete")',
+                    data: { id: $(this).val() },
+                    dataType: "json",
+                    error: function (msg) {
+                        alert(msg);
+                    },
+                    success: function (data) {
+                       
+                        location.reload();
+                    }
+
+                });
+            }
+        });
+
+
+
+
+    </script>
+
+}
+
+
