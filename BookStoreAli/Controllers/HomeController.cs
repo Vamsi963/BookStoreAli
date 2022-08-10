@@ -62,7 +62,7 @@ namespace BookStoreAli.Controllers
             }
             catch (Exception ex)
             {
-                errormessage = "Something Went Wrong Try Again Later";
+                ViewBag.incorrect = "Something Went Wrong Try Again Later";
             }
 
             return View(user);

@@ -6,11 +6,20 @@
 
 <h1>Book Store</h1>
 
+@Html.ActionLink(linkText: "Create", actionName: "Create")
 
-<p>
-    @Html.ActionLink(linkText: "Create", actionName: "Create", routeValues: "", htmlAttributes: new { @class = "btn btn-primary" })
-</p>
 
+
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#addBook" data-url="@Url.Action("CreatePartial","Book")">
+    Create
+</button>
+
+<div id="PlaceHolder"></div>
+
+<br />
+@*@{
+    Html.RenderPartial("CreatePartial");
+    }*@
 <table class="table">
     <thead>
         <tr>
@@ -65,8 +74,10 @@
 
                 <td>
                     @Html.ActionLink(linkText: "Edit", actionName: "Edit", routeValues: new { Id = item.Id }, htmlAttributes: new { @class = "btn btn-info btn-sm" })
+
+
                     @*@Html.ActionLink(linkText: "Delete", actionName: "Delete", routeValues: new {Id =item.Id}, htmlAttributes: new { @class = "btn btn-danger btn-sm deleteBtn" })*@
-                    <button class="btn btn-danger btn-sm deleteBtn" value="@item.Id">Delete</button>
+                    <button class="btn btn-danger btn-sm deleteBtn" value="@item.Id"><i class="fa fa-user glyphicon-trash"></i>Delete</button>
 
                 </td>
 
@@ -74,11 +85,11 @@
         }
     </tbody>
 </table>
-<form id="deleteForm"  action="Delete" method="post">
+<form id="deleteForm" action="Delete" method="post">
     <input type="hidden" id="bookId" name="Id" />
 </form>
 @section scripts{
-
+    <script src="~/Scripts/Modal.js"></script>
     <script>
 
         $('.deleteBtn').click(function (e) {
@@ -93,7 +104,7 @@
                         alert(msg);
                     },
                     success: function (data) {
-                       
+
                         location.reload();
                     }
 
@@ -102,10 +113,38 @@
         });
 
 
+       // $(function () {
+       //     var PlaceHolder = $('#PlaceHolder');
+       // $('button[data-toggle="ajax-modal"]').click(function (event) {
 
+       //     var url = $(this).data('url');
+       //    // alert(url);
 
+           
+       //         $.get(url).done(function (data) {
+       //             PlaceHolder.html(data);
+       //             PlaceHolder.find('.modal').modal('show');
+
+       //         })
+
+       // })
+       //     //PlaceHolder.on('click', '[data-save="modal]', function (event) {
+       //         $('button[data-save="modal"]').click(function (event) {
+       //         alert('hello');
+       //         var form = $(this).parents('.modal').find('form');
+       //         var actUrl = form.attr('action');
+       //         var data = form.serialize();
+       //         $.post(actUrl, data).done(function(data){
+       //             PlaceHolder.reload();
+       //         })
+
+       //     })
+
+       //})
     </script>
 
+
 }
+
 
 

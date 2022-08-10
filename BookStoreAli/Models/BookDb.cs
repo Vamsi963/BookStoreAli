@@ -9,8 +9,8 @@ namespace BookStoreAli.Models
 {
     public class BookDb
     {
-        SqlConnection con = new SqlConnection(@"Data Source = DESKTOP-THUOFTE\SQLEXPRESS; Initial Catalog = MVCFramework; Integrated Security=true; ");
-
+        SqlConnection con = new SqlConnection(@"Data Source = DESKTOP-THUOFTE\SQLEXPRESS; Initial Catalog = MVCFramework; User id=MVCProject; Password=0147");
+     
 
         public IEnumerable<Book> GetBooks()
         {

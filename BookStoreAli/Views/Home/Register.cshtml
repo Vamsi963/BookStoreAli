@@ -30,9 +30,17 @@
                     <label for="exampleInputPassword1">Confirm Password</label>
                     <input type="password" id="confirmPassword" name="@nameof(Model.ConfirmPassword)" class="form-control" placeholder="Password">
                     @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                    @*@Html.CheckBoxFor(m => m.Remember) Remember Me*@
+                <div>
+                    @Html.CheckBoxFor(m => m.Remember,new {@class="alertCheckbox",id= "alertCheckboxId", onclick ="message()"}) Remember Me
                 </div>
-                <button type="submit" class="btn btn-primary registerBtn">Register</button>
-                <span> &nbsp; Already Registered? @Html.ActionLink("Login", "Login")</span>
+                </div>
+               
+
+
+                    <button type="submit" class="btn btn-primary registerBtn">Register</button>
+                    <span> &nbsp; Already Registered? @Html.ActionLink("Login", "Login")</span>
+
 
             </form>
 
@@ -42,6 +50,27 @@
 
     </div>
 </div>
+@section scripts{
+<script>
+    //using javascript
+    function message() {
+        let box = document.getElementById('alertCheckboxId');
+        if (box.checked)
+            alert('You will be signed in automatically Next Time');
+        else
+            alert('You should sign in Next Time');
+    }
 
+    // Using Jquery
+
+    $('#alertCheckboxId').click(function(){
+        if (this.checked)
+            alert('You will be signed in automatically Next Time');
+        else
+            alert('You should sign in Next Time');
+    })
+</script>
+
+    }
 
 

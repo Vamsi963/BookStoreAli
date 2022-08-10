@@ -10,5 +10,6 @@ namespace BookStoreAli.Models
     {
         [Required,Compare("Password",ErrorMessage ="Passwords doesnt match . Try Again")]
         public string ConfirmPassword { get; set; }
+        public bool Remember { get; set; }
     }
 }

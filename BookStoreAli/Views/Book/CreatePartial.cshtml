@@ -1,0 +1,82 @@
+﻿@model BookStoreAli.Models.Book
+@{
+    ViewBag.Title = "CreatePartial";
+}
+
+
+<div class="modal fade" id="addBok">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Book</h2>
+            </div>
+            <div class="modal-body">
+                <form action="@Url.Action("Create")" method="Post">
+                    <div class="row">
+                        <label class="col-md-4">@nameof(Model.Name)</label>
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @*  <input class="form-control col-md-6" name="@nameof(Model.Name)" value="@Model.Name" />*@
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger col-md-offset-4" })
+
+                    </div>
+
+                    <div class="row">
+                        <label class="col-md-4">@nameof(Model.Price)</label>
+                        @*  <input class="form-control col-md-6" name="@nameof(Model.Price)" value="@Model.Price" type="number" />*@
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="col-md-offset-4">@Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })</div>
+
+                    </div>
+
+
+                    <br />
+                    <div class="row">
+                        <label class="col-md-4">@nameof(Model.Category)</label>
+                        @Html.DropDownList(nameof(Model.Category), Model.Categories, "Select Category", new { @class = "form-control" })
+                        @*@Html.DropDownList()*@
+                        <div class="col-md-offset-4">@Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })</div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <label class="col-md-4">@nameof(Model.Author)</label>
+                        @*   <input class="form-control col-md-6" name="@nameof(Model.Author)" value="@Model.Author" />*@
+                        @Html.EditorFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger col-md-offset-4" })
+
+                    </div>
+
+
+                    <div class="row">
+                        <label class="col-md-4">@nameof(Model.Available)</label>
+                        <select class="form-control md-3" name="@nameof(Model.Available)">
+                            <option value="">Select Availability</option>
+                            <option value="true">Yes</option>
+                            <option value="false">No</option>
+                        </select>
+                        <div class="col-md-offset-4"> @Html.ValidationMessageFor(model => model.Available, "", new { @class = "text-danger" })</div>
+
+
+                    </div>
+                    <div style="margin-top:15px">
+                        <button type="submit" class="col-md-offset-4 btn btn-success">Submit</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                    </div>
+
+                        @*  @Html.ActionLink(linkText: "Back to List", actionName: "BookDetails", routeValues: "", htmlAttributes: new { @class = "btn btn-primary" })*@
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button"  data-save="modal" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+
+        </div>
+    </div>
+
+    
+        @Scripts.Render("~/bundles/jqueryval")
+      
+    

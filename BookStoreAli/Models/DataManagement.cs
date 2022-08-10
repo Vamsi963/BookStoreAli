@@ -10,8 +10,7 @@ namespace BookStoreAli.Models
 
     public class DataManagement
     {
-        SqlConnection con = new SqlConnection(@"Data Source = DESKTOP-THUOFTE\SQLEXPRESS; Initial Catalog = MVCFramework; Integrated Security=true; ");
-
+        SqlConnection con = new SqlConnection(@"Data Source = DESKTOP-THUOFTE\SQLEXPRESS; Initial Catalog = MVCFramework; User id=MVCProject; Password=0147");
 
         public bool CheckIfUserExists(User user)
         {

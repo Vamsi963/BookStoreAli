@@ -5,7 +5,10 @@
 }
 
 <h2>Edit</h2>
-<form method="Post">
+
+<h1>Hello Edit Model</h1>
+
+<!--<form method="Post">
     <input type="hidden" name="@nameof(Model.Id)" value="@Model.Id" />
     <div class="row">
         <label class="col-md-4">@nameof(Model.Name)</label>
@@ -24,11 +27,11 @@
 
     <br />
     <div class="row">
-        <label class="col-md-4">@nameof(Model.Category)</label>
+        <label class="col-md-4">@nameof(Model.Category)</label>-->
         @*  @Html.DropDownList(nameof(Model.Category), new SelectList(ViewBag.BookCategories), "Select Category", new { @class = "form-control" })*@
-        @Html.DropDownList(nameof(Model.Category), Model.Categories, "Select Category", new { @class = "form-control" })
+        <!--@Html.DropDownList(nameof(Model.Category), Model.Categories, "Select Category", new { @class = "form-control" })-->
         @*@Html.DropDownList()*@
-        <div class="col-md-offset-4">@Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })</div>
+        <!--<div class="col-md-offset-4">@Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })</div>
 
     </div>
     <br />
@@ -55,24 +58,6 @@
     <button type="submit" class="col-md-offset-4 btn btn-success">Submit</button>
 
     @Html.ActionLink(linkText: "Back to List", actionName: "BookDetails", routeValues: "", htmlAttributes: new { @class = "btn btn-primary" })
-</form>
-@*@section scripts{
-
-    <script>
-
-        //$('.deleteBtn').click(function (e) {
-            $('#status_id').val( @Model.Available).change();
-         
-      
-
-    
-        //});
-    </script>
-
-}*@
-@*<script>
-
-        $('#status_id').val("trueu").change();
+</form>-->
 
 
-    </script>*@

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,19 +10,31 @@ namespace BookStoreAli.Controllers
 {
     public class BookController : Controller
     {
-        BookDb db = new BookDb();
+
+        BookDbDapper db = new BookDbDapper();
         // GET: Book
         //Index
-        public ActionResult BookDetails()
+        public async Task<ActionResult> BookDetails()
         {
-            IEnumerable<Book> books = db.GetBooks();
+            IEnumerable<Book> books =await db.GetBooks();
+            
             return View(books);
         }
 
 
         public ActionResult Create()
         {
+          //  return PartialView("CreatePartial", new Book());
+         //   return View("CreatePartial",new Book());    
             return View(new Book());
+        }
+
+
+        public ActionResult CreatePartial()
+        {
+            return PartialView("CreatePartial", new Book());
+            //   return View("CreatePartial",new Book());    
+           // return View(new Book());
         }
 
         [HttpPost]
@@ -38,10 +51,12 @@ namespace BookStoreAli.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
-            book.Categories.Where(b => b.Text.ToUpper() == book.Category.ToUpper()).First().Selected = true;
+            if (!string.IsNullOrEmpty(book.Category))
+                book.Categories.Where(b => b.Text.ToUpper() == book.Category.ToUpper()).First().Selected = true;
+
+            return PartialView("CreatePartial", book);
 
             return View(book);
         }
@@ -51,7 +66,8 @@ namespace BookStoreAli.Controllers
         {
             Book book = db.GetBook(Id);
 
-            book.Categories.Where(b => b.Text.ToUpper() == book.Category.ToUpper()).First().Selected = true;
+            if (!string.IsNullOrEmpty(book.Category))
+                book.Categories.Where(b => b.Text.ToUpper() == book.Category.ToUpper()).First().Selected = true;
             return View(book);
         }
 
@@ -81,8 +97,8 @@ namespace BookStoreAli.Controllers
         public ActionResult Delete(int? Id)
         {
             if (db.Delete(Id))
-                return Json(new { success=true });
-                //return RedirectToAction(nameof(BookDetails));
+                return Json(new { success = true });
+            //return RedirectToAction(nameof(BookDetails));
             return View();
 
         }
